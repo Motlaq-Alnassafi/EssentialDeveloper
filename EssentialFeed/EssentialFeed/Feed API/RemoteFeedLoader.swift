@@ -40,7 +40,7 @@ public final class RemoteFeedLoader {
             switch result {
             case let .success(data, response):
                 do {
-                let items = try FeedItemsMapper.map(data, response)
+                    let items = try FeedItemsMapper.map(data, response)
                     completion(.success(items))
                 } catch {
                     completion(.failure(.invalidData))
@@ -51,6 +51,7 @@ public final class RemoteFeedLoader {
         }
     }
 }
+
 private class FeedItemsMapper {
     private struct Root: Decodable {
         let items: [item]
@@ -61,11 +62,12 @@ private class FeedItemsMapper {
         let description: String?
         let location: String?
         let image: URL
-        
+
         var item: FeedItem {
             return FeedItem(id: id, description: description, location: location, imageURL: image)
         }
     }
+
     static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [FeedItem] {
         guard response.statusCode == 200 else {
             throw RemoteFeedLoader.Error.invalidData

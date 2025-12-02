@@ -10,7 +10,7 @@ import Foundation
 enum FeedItemsMapper {
     private struct Root: Decodable {
         let items: [item]
-        
+
         var feed: [FeedItem] {
             return items.map { $0.item }
         }

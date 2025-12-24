@@ -156,11 +156,11 @@ class RemoteFeedLoaderTests: XCTestCase {
                 XCTFail("expected result \(expectedResult), received \(receivedResult)", file: file, line: line)
             }
         }
-        
+
         exp.fulfill()
 
         action()
-        
+
         wait(for: [exp], timeout: 1.0)
     }
 
